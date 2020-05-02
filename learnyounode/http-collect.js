@@ -9,31 +9,36 @@
 
 // second line
 // the complete string of character sent
-
-const bl = require("bl");
+"use strict";
 const http = require("http");
+const bl = require("bl");
 
-http.get(process.argv[2], (response) => {
+http.get(process.argv[2], function (response) {
   response.pipe(
     bl(function (err, data) {
-      if (err) return console.log(`err ${err}`);
+      if (err) {
+        return console.error(err);
+      }
+      data = data.toString();
       console.log(data.length);
-      console.log(data.toString());
+      console.log(data);
     })
   );
 });
 
-// 'use strict'
-// const http = require('http')
-// const bl = require('bl')
+// ("use strict");
+// const http = require("http");
+// const bl = require("bl");
 
 // http.get(process.argv[2], function (response) {
-//   response.pipe(bl(function (err, data) {
-//     if (err) {
-//       return console.error(err)
-//     }
-//     data = data.toString()
-//     console.log(data.length)
-//     console.log(data)
-//   }))
-// })
+//   response.pipe(
+//     bl(function (err, data) {
+//       if (err) {
+//         return console.error(err);
+//       }
+//       data = data.toString();
+//       console.log(data.length);
+//       console.log(data);
+//     })
+//   );
+// });
