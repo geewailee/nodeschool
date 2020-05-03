@@ -1,9 +1,9 @@
-// Prototypes
+// State!
 
-// learn to validate that our components get passed all the necessary properties.
+// define mutable values!
+// what if we want to update components?
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 export default class TodoBox extends React.Component {
   render() {
@@ -17,27 +17,11 @@ export default class TodoBox extends React.Component {
   }
 }
 
-// you can use a range of validators on the data passed into your components.
-// class MyComponent extends React.Component {
-//   /* ... */
-// }
-// MyComponent.propTypes = {
-//     name:   PropTypes.string.isRequired,
-//     id:     PropTypes.number.isRequired,
-//     width:  PropTypes.number.isRequired,
-//     height: PropTypes.number.isRequired,
-//     alt:    PropTypes.string
-// };
-// In development mode, when an invalid value is provided for a prop, a warning
-// will be shown in your browser's JavaScript console.
-
 class TodoList extends React.Component {
   render() {
     return (
       <div className="todoList">
-        {/* look here retard, also this is how you do comments */}
-        <table style={{ border: '2px solid black;' }}>
-          {' '}
+        <table style={{ border: '2px solid black' }}>
           <tbody>
             <Todo title="Shopping">Milk</Todo>
             <Todo title="Hair cut">13:00</Todo>
@@ -49,18 +33,37 @@ class TodoList extends React.Component {
   }
 }
 
+// this.state is private to each component and allows us to define mutable values.
+
+// define a function to control the behavior of check events.
+// Within handleChange, you should update the component's state by using this.setState.
+
 class Todo extends React.Component {
+  constructor(props) {
+    super(props);
+
+    // set the initial value of checkbox to false
+    this.state.checked = false;
+  }
+
   render() {
     return (
       <tr>
-        <td style={{ border: '1px solid black;' }}>{this.props.title}</td>
-        <td style={{ border: '1px solid black;' }}>{this.props.children}</td>
+        <td style={{ border: '1px solid black' }}>
+          <input
+            type="checkbox"
+            checked={this.state.checked}
+            onChange={this.handleChange.bind(this)}
+          />
+        </td>
+        <td style={{ border: '1px solid black' }}>{this.props.title}</td>
+        <td style={{ border: '1px solid black' }}>{this.props.children}</td>
       </tr>
     );
   }
 }
 Todo.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: React.PropTypes.string.isRequired,
 };
 
 class TodoForm extends React.Component {
@@ -68,3 +71,7 @@ class TodoForm extends React.Component {
     return <div className="todoForm">I am a TodoForm.</div>;
   }
 }
+
+// The resources are always recommended, but may be especially helpful here:
+// Component API: [https://](https://)
+// Component Specs and Lifecycle: [https://](https://)
