@@ -24,7 +24,7 @@ class TodoList extends React.Component {
   render() {
     return (
       <div className="todoList">
-        {/* look here retard, also this is how you do comments */}
+        {/* look here!, also this is how you do comments */}
         <table style={{ border: '2px solid black;' }}>
           {' '}
           <tbody>
