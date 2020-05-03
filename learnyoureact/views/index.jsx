@@ -1,12 +1,9 @@
-// // pass values from a parent component to a child component.
-// A child component can have values handed to it either through
-//  attributes, or through nested content.
+// Prototypes
 
-// <ChildComponent some-attribute="this gets passed">So does this</ChildComponent>
-
-// https://reactjs.org/docs/components-and-props.html
+// learn to validate that our components get passed all the necessary properties.
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class TodoBox extends React.Component {
   render() {
@@ -20,6 +17,20 @@ export default class TodoBox extends React.Component {
   }
 }
 
+// you can use a range of validators on the data passed into your components.
+// class MyComponent extends React.Component {
+//   /* ... */
+// }
+// MyComponent.propTypes = {
+//     name:   PropTypes.string.isRequired,
+//     id:     PropTypes.number.isRequired,
+//     width:  PropTypes.number.isRequired,
+//     height: PropTypes.number.isRequired,
+//     alt:    PropTypes.string
+// };
+// In development mode, when an invalid value is provided for a prop, a warning
+// will be shown in your browser's JavaScript console.
+
 class TodoList extends React.Component {
   render() {
     return (
@@ -30,6 +41,7 @@ class TodoList extends React.Component {
           <tbody>
             <Todo title="Shopping">Milk</Todo>
             <Todo title="Hair cut">13:00</Todo>
+            <Todo title="Learn React">15:00</Todo>
           </tbody>
         </table>
       </div>
@@ -37,13 +49,6 @@ class TodoList extends React.Component {
   }
 }
 
-// you can get the value of the title attribute
-// set in TodoList
-// (the parent component) by using {this.props.title}.
-// Likewise, you can get the values Milk
-// and 13:00 by using {this.props.children}.
-
-// write some JSX that results in the HTML below.
 class Todo extends React.Component {
   render() {
     return (
@@ -51,11 +56,12 @@ class Todo extends React.Component {
         <td style={{ border: '1px solid black;' }}>{this.props.title}</td>
         <td style={{ border: '1px solid black;' }}>{this.props.children}</td>
       </tr>
-      // {this.props.title} //gets the value of the title attribute
-      // {this.props.children} // get values of milk and 13:00
     );
   }
 }
+Todo.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 class TodoForm extends React.Component {
   render() {
